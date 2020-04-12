@@ -23,17 +23,15 @@ def pytest_addoption(parser):
 @pytest.fixture(scope="function")
 def browser(request):
     """
-    :param request: request is native pytest fixture for take some params from command line
-    :return: we use this fixture for each test-case; in this case we choose browser-type and language;
-             we launch browser before test-case starts and we quit from it after all actions
+    request is native pytest fixture for take some params from command line
+    we use this fixture for each test-case; in this case we choose browser-type and language;
+    we launch browser before test-case starts and we quit from it after all actions
     """
     browser_name = request.config.getoption("browser_name")
     prefer_language = request.config.getoption("language")
-    browser = None
     if browser_name == "chrome":
         options = Options()
-        options.add_argument('headless') #with
-        #options.add_argument('window-size=1920x935')
+        options.add_argument('headless')
         options.add_experimental_option('prefs', {'intl.accept_languages': prefer_language})
         browser = webdriver.Chrome(options=options)
     elif browser_name == "firefox":
