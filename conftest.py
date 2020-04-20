@@ -31,7 +31,7 @@ def browser(request):
     prefer_language = request.config.getoption("language")
     if browser_name == "chrome":
         options = Options()
-        #options.add_argument('headless')
+        options.add_argument('headless')
         options.add_experimental_option('prefs', {'intl.accept_languages': prefer_language})
         browser = webdriver.Chrome(options=options)
     elif browser_name == "firefox":
